@@ -31,9 +31,9 @@ void bfs(int start)
 			{
 				nx = graph[pos + i][0];
 			}
-			if (dist[nx] == 10000)
+			if (!visited[nx])
 			{
-				//visited[nx] = true;
+				visited[nx] = true;
 				dist[nx] = dist[pos] + 1;
 				q.push(nx);
 			}
