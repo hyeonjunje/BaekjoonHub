@@ -1,60 +1,65 @@
 #include<iostream>
-#include<vector>
 #include<queue>
 #include<string.h>
 #include<string>
 
 using namespace std;
 
-bool visited[10000]{};
+const int MAX = 10000;
+
 int A, B;
+bool visited[MAX]{};
+
 string bfs()
 {
 	queue<pair<int, string>> q;
-	q.push({ A , ""});
 	visited[A] = true;
+	q.push({ A, "" });
 
 	while (!q.empty())
 	{
 		int current = q.front().first;
-		string change = q.front().second;
+		string ans = q.front().second;
+
 		q.pop();
 
-		if (current == B) return change;
+		if (current == B) return ans;
 
 		//D
-		int curNum = (2 * current) % 10000;
-		if (!visited[curNum])
+		int node = (current * 2) % MAX;
+		if (visited[node] == false)
 		{
-			visited[curNum] = true;
-			q.push({ curNum, change + "D" });
+			visited[node] = true;
+			q.push({ node, ans + "D" });
 		}
 
 		//S
-		curNum = (current - 1) < 0 ? 9999 : current - 1;
-		if (!visited[curNum])
+		node = current == 0 ? 9999 : current - 1;
+		if (visited[node] == false)
 		{
-			visited[curNum] = true;
-			q.push({ curNum, change + "S" });
+			visited[node] = true;
+			q.push({ node, ans + "S" });
 		}
 
 		//L
-		curNum = (current % 1000) * 10 + current / 1000;
-		if (!visited[curNum])
+		node = (current % 1000) * 10 + (current / 1000);
+		if (visited[node] == false)
 		{
-			visited[curNum] = true;
-			q.push({ curNum, change + "L" });
+			visited[node] = true;
+			q.push({ node, ans + "L" });
 		}
 
 		//R
-		curNum = (current % 10) * 1000 + (current / 10);
-		if (!visited[curNum])
+		node = (current % 10) * 1000 + (current / 10);
+		if (visited[node] == false)
 		{
-			visited[curNum] = true;
-			q.push({ curNum, change + "R" });
+			visited[node] = true;
+			q.push({ node, ans + "R" });
 		}
 	}
+	return "";
 }
+
 
 int main()
 {
@@ -62,12 +67,13 @@ int main()
 
 	int T;
 	cin >> T;
-
 	for (int i = 0; i < T; i++)
 	{
 		memset(visited, false, sizeof(visited));
 		cin >> A >> B;
 
 		cout << bfs() << '\n';
+
+		//cout << (A % 10) * 1000 + (A / 10) << '\n';
 	}
 }
