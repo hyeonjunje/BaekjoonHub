@@ -1,45 +1,47 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<vector>
+
 using namespace std;
 
-//0<= node <=10000
+//#define MAX 10000
 
 int tree[10000];
-void postOrder(int start, int end) {
-	if (start >= end) {
-		return;
-	}
-	if (start == end - 1) {
+
+void makeTree(int start, int end)
+{
+	if (start >= end) return;
+
+	if (start == end - 1)
+	{
 		cout << tree[start] << '\n';
 		return;
 	}
-	int idx = start + 1;
-	while (idx < end) {
-		if (tree[start] < tree[idx]) {
-			break;
-		}
-		idx++;
+
+	int idx = 0;
+
+	for (idx = start + 1; idx < end; idx++)
+	{
+		if (tree[start] < tree[idx]) break;
 	}
 
-	postOrder(start + 1, idx);
-	postOrder(idx, end);
+	makeTree(start + 1, idx);
+	makeTree(idx, end);
 	cout << tree[start] << '\n';
 }
 
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
+int main()
+{
+	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-	int num;
-	int inputIdx = 0;
-	while (cin >> num) {
-		tree[inputIdx++] = num;
+	int a, size = 0;
+
+	while (cin >> a)
+	{
+		if (a == cin.fail()) break;
+		tree[size++] = a;
 	}
 
-	postOrder(0, inputIdx);
-
-
+	makeTree(0, size);
 
 	return 0;
 }
