@@ -1,45 +1,39 @@
 #include<iostream>
-#include<vector>
 
 using namespace std;
 
-int myInOrder[100001];
-int myPostOrder[100001];
 
-int idx[100001];
+#define MAX 100001
 
-int N;
+int inOrder[MAX], postOrder[MAX], idx[MAX];
 
-void preOrder(int inBegin, int inEnd, int postBegin, int postEnd)
+void dfs(int s1, int e1, int s2, int e2)
 {
-	if (inBegin > inEnd || postBegin > postEnd) return;
+	if (s1 > e1 || s2 > e2) return;
 
-	int root = myPostOrder[postEnd];
+	int root = postOrder[e2];
 	cout << root << ' ';
 
-	preOrder(inBegin, idx[root] - 1, postBegin, postBegin + (idx[root] - inBegin) - 1);
-	preOrder(idx[root] + 1, inEnd, postBegin + (idx[root] - inBegin), postEnd - 1);
-}
+	// left
+	dfs(s1, idx[root] - 1, s2, s2 + idx[root] - s1 - 1);
 
+	// right
+	dfs(idx[root] + 1, e1, s2 + idx[root] - s1, e2 - 1);
+}
 
 int main()
 {
 	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-	cin >> N;
+	int n;
+	cin >> n;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < n; i++) cin >> inOrder[i];
+	for (int i = 0; i < n; i++) cin >> postOrder[i];
+	for (int i = 0; i < n; i++)
 	{
-		cin >> myInOrder[i];
+		idx[inOrder[i]] = i;
 	}
-	for (int i = 0; i < N; i++)
-	{
-		cin >> myPostOrder[i];
-	}
-	for (int i = 0; i < N; i++)
-	{
-		idx[myInOrder[i]] = i;
-	}
-	
-	preOrder(0, N - 1, 0, N - 1);
+
+	dfs(0, n - 1, 0, n - 1);
 }
