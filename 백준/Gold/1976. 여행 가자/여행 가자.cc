@@ -41,10 +41,11 @@ int main()
 		for (int j = 0; j < N; j++)
 		{
 			cin >> city;
-			if (i == j) continue;
-			if (city == 1) Union(i + 1, j+1);
+			if (city == 1) Union(i + 1, j + 1);
 		}
 	}
+
+
 
 	vector<int> v;
 	for (int i = 0; i < M; i++)
@@ -52,10 +53,11 @@ int main()
 		cin >> city;
 		v.push_back(city);
 	}
+	int temp = root[v[0]];
 
 	for (int i = 1; i < v.size(); i++)
 	{
-		if (root[v[0]] != root[v[i]]) { cout << "NO"; return 0; }
+		if (temp != root[v[i]]) { cout << "NO"; return 0; }
 	}
 	cout << "YES";
 }
