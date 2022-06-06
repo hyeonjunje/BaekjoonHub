@@ -41,7 +41,8 @@ int main()
 		for (int j = 0; j < N; j++)
 		{
 			cin >> city;
-			if (city == 1) Union(i + 1, j + 1);
+			if (i == j) continue;
+			if (city == 1) Union(i + 1, j+1);
 		}
 	}
 
@@ -51,8 +52,6 @@ int main()
 		cin >> city;
 		v.push_back(city);
 	}
-
-	if (v.size() <= 1) { cout << "YES"; return 0; }
 
 	for (int i = 1; i < v.size(); i++)
 	{
