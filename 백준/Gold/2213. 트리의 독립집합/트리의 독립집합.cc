@@ -73,5 +73,6 @@ int main()
 	sort(path.begin(), path.end());
 
 	cout << max(dp[0][1], dp[1][1]) << '\n';
-	for (auto &i : path) cout << i << ' ';
+	for (auto i : path) cout << i << ' ';
+
 }
