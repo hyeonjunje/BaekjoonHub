@@ -5,19 +5,16 @@
 
 using namespace std;
 
-int cost[10001]{};
 int dp[2][10001]{}; // dp[0] : 노드 포함, dp[1] : 노드 포함X
 vector<int> graph[10001]{};
 
 bool visited[10001]{};
 vector<int> path;
 
-
 void dfs(int start)
 {
 	visited[start] = true;
-	dp[0][start] = cost[start];
-	dp[1][start] = 0;
+
 
 	for (int i = 0; i < graph[start].size(); i++)
 	{
@@ -56,7 +53,7 @@ int main()
 	cin >> n;
 	for (int i = 1; i <= n; i++)
 	{
-		cin >> cost[i];
+		cin >> dp[0][i];
 	}
 
 	for (int i = 0; i < n - 1; i++)
