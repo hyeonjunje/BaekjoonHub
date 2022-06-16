@@ -15,7 +15,6 @@ void dfs(int start)
 {
 	visited[start] = true;
 	dp[start][0] = 1;
-	vector<int> child;
 	for (int i = 0; i < graph[start].size(); i++)
 	{
 		int next = graph[start][i];
