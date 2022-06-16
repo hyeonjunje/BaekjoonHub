@@ -1,15 +1,9 @@
-#include<iostream>
-#include<algorithm>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
-
-int main()
-{
-	string s;
-
-	for (int i = 0; i < 100; i++)
-	{
-		getline(cin, s);
-		cout << s << '\n';
-	}
+int main() {
+    string text;
+    while (getline(cin, text)) {
+        cout << text << endl;
+    }
 }
