@@ -1,43 +1,31 @@
 #include<iostream>
 #include<vector>
 #include<string.h>
-
+#include<algorithm>
 using namespace std;
 
 #define MAX 1000001
 
 vector<int> graph[MAX];
 bool visited[MAX];
-int dp[MAX];
+int dp[MAX][2];
 
-bool checkEqual(vector<int> child)
-{
-	for (int i : child)
-	{
-		if (dp[i] == -1) return true;
-	}
-	return false;
-}
 
 void dfs(int start)
 {
 	visited[start] = true;
+	dp[start][0] = 1;
 	vector<int> child;
 	for (int i = 0; i < graph[start].size(); i++)
 	{
 		int next = graph[start][i];
-		if (!visited[next])
-		{
-			dfs(next);
-			child.push_back(next);
-		}
-	}
+		if (visited[next]) continue;
 
-	if (checkEqual(child))
-	{
-		dp[start] = 1;
+		dfs(next);
+		dp[start][1] += dp[next][0];
+		dp[start][0] += min(dp[next][0], dp[next][1]);
+
 	}
-	
 }
 
 int main()
@@ -46,7 +34,6 @@ int main()
 
 	int N, a, b;
 	cin >> N;
-	memset(dp, -1, sizeof(dp));
 	for (int i = 0; i < N - 1; i++)
 	{
 		cin >> a >> b;
@@ -56,10 +43,5 @@ int main()
 
 	dfs(1);
 
-	int ans = 0;
-	for (int i = 1; i <= N; i++)
-	{
-		if (dp[i] == 1) ans++;
-	}
-	cout << ans;
+	cout << min(dp[1][0], dp[1][1]);
 }
