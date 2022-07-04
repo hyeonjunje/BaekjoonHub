@@ -10,19 +10,14 @@ bool fir = false;
 
 struct Trie
 {
-	Trie() {};
-	~Trie() {
-		for (auto iter = m.begin(); iter != m.end(); iter++)
-		{
-			delete (*iter).second;
-		}
-	}
+	bool isEnd = false;
 	map<char, Trie*> m;
 
 	void Insert(string word, int idx = 0)
 	{
 		if (word.size() == idx) { 
-			m.insert({ ' ', new Trie()});
+			this->isEnd = true;
+			//m.insert({ ' ', new Trie()});
 			return; 
 		}
 
@@ -43,7 +38,7 @@ struct Trie
 			if ((*iter).first == word[idx])
 			{
 				//cout << (*iter).first << ' ' << word[idx] << ' ' << m.size() << '\n';
-				if (fir || m.size() != 1)
+				if (fir || m.size() != 1 || this -> isEnd)
 				{
 					fir = false;
 					ans++;
@@ -80,7 +75,6 @@ int main()
 		for (int i = 0; i < N; i++)
 		{
 			fir = true;
-			//ans = (root->m.size() != 1 ? 0 : 1);
 			ans = 0;
 			root->Input(words[i]);
 			sum += ans;
