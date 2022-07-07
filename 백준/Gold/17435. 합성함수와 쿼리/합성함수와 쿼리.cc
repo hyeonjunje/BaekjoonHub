@@ -8,7 +8,6 @@ using namespace std;
 #define MAX 200001
 
 int y[MAX][MAXLOG];  // x를 2^(i)번 f한 결과
-int f[MAX];
 
 int main()
 {
@@ -19,8 +18,7 @@ int main()
 
 	for (int i = 1; i <= m; i++)
 	{
-		cin >> f[i];
-		y[i][0] = f[i];
+		cin >> y[i][0];
 	}
 
 	for (int j = 1; j < MAXLOG; j++)
@@ -36,17 +34,7 @@ int main()
 	{
 		cin >> n >> x;
 
-		int tmp = 0;
-		for (int i = MAXLOG - 1; i >= 0; i--)
-		{
-			if (n >= pow(2, i))
-			{
-				tmp = i;
-				break;
-			}
-		}
-
-		for (int i = 0; i <= tmp; i++)
+		for (int i = 0; n; i++)
 		{
 			if (n % 2) x = y[x][i];
 			n >>= 1;
