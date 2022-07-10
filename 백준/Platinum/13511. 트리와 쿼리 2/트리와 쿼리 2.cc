@@ -30,25 +30,27 @@ void dfs(int current)
 
 int LCA(int b, int c)
 {
-	if (Rank[b] < Rank[c])
+	while (Rank[b] != Rank[c])
 	{
-		int diff = Rank[c] - Rank[b];
-		for (int i = 0; diff; i++)
+		if (Rank[b] < Rank[c])
 		{
-			if (diff % 2 == 1) { c = parent[i][c]; }
-			diff >>= 1;
+			int diff = Rank[c] - Rank[b];
+			for (int i = 0; diff; i++)
+			{
+				if (diff % 2 == 1) { c = parent[i][c]; }
+				diff >>= 1;
+			}
+		}
+		else
+		{
+			int diff = Rank[b] - Rank[c];
+			for (int i = 0; diff; i++)
+			{
+				if (diff % 2 == 1) { b = parent[i][b]; }
+				diff >>= 1;
+			}
 		}
 	}
-	else
-	{
-		int diff = Rank[b] - Rank[c];
-		for (int i = 0; diff; i++)
-		{
-			if (diff % 2 == 1) { b = parent[i][b]; }
-			diff >>= 1;
-		}
-	}
-
 	if (b != c)
 	{
 		for (int i = MAXLOG - 1; i >= 0; i--)
