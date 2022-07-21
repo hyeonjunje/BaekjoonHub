@@ -1,10 +1,9 @@
 #include<iostream>
 #include<cmath>
-
 #define MAX 1000001
 using namespace std;
 
-long long* tree;
+long long *tree;
 long long a[MAX];
 
 long long init(int start, int end, int node)
@@ -27,11 +26,11 @@ long long sum(int start, int end, int node, int left, int right)
 void update(int start, int end, int node, int from, long long diff)
 {
 	if (from < start || from > end) return;
+
 	tree[node] += diff;
 	if (start == end) return;
 
 	int mid = (start + end) / 2;
-
 	update(start, mid, node * 2, from, diff);
 	update(mid + 1, end, node * 2 + 1, from, diff);
 }
@@ -44,12 +43,11 @@ int main()
 	cin >> N >> M >> K;
 	int height = (int)ceil(log2(N));
 	tree = new long long[1 << (height + 1)];
-
 	for (int i = 1; i <= N; i++)
 	{
 		cin >> a[i];
 	}
-	
+
 	init(1, N, 1);
 
 	for (int i = 0; i < M + K; i++)
@@ -63,7 +61,7 @@ int main()
 			a[n2] = n3;
 			update(1, N, 1, n2, diff);
 		}
-		else if(n1 == 2)
+		else
 		{
 			cout << sum(1, N, 1, n2, n3) << '\n';
 		}
