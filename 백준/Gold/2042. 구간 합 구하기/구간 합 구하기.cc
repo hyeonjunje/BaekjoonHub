@@ -3,7 +3,7 @@
 #define MAX 1000001
 using namespace std;
 
-long long *tree;
+long long tree[4 * MAX];
 long long a[MAX];
 
 long long init(int start, int end, int node)
@@ -41,8 +41,7 @@ int main()
 
 	int N, M, K;
 	cin >> N >> M >> K;
-	int height = (int)ceil(log2(N));
-	tree = new long long[1 << (height + 1)];
+
 	for (int i = 1; i <= N; i++)
 	{
 		cin >> a[i];
