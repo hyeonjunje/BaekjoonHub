@@ -3,14 +3,14 @@
 #define MAX 100001
 using namespace std;
 
-long long nums[MAX];
-long long minTree[4 * MAX];
-long long maxTree[4 * MAX];
+int nums[MAX];
+int minTree[4 * MAX];
+int maxTree[4 * MAX];
 
 int N, M, a, b;
 
 
-long long init(int start, int end, int node)
+int init(int start, int end, int node)
 {
 	if (start == end) 
 	{
@@ -24,7 +24,7 @@ long long init(int start, int end, int node)
 	};
 }
 
-long long findMinMax(int start, int end, int node, int left, int right)
+int findMinMax(int start, int end, int node, int left, int right)
 {
 	if (end < left || right < start) return 1000000001;
 	if (left <= start && end <= right) return minTree[node];
@@ -37,7 +37,7 @@ long long findMinMax(int start, int end, int node, int left, int right)
 	};
 }
 
-long long init1(int start, int end, int node)
+int init1(int start, int end, int node)
 {
 	if (start == end)
 	{
@@ -51,7 +51,7 @@ long long init1(int start, int end, int node)
 	};
 }
 
-long long findMinMax1(int start, int end, int node, int left, int right)
+int findMinMax1(int start, int end, int node, int left, int right)
 {
 	if (end < left || right < start) return 0;
 	if (left <= start && end <= right) return maxTree[node];
