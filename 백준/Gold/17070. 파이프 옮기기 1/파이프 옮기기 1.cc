@@ -1,39 +1,45 @@
 #include<iostream>
 #include<utility>
-#define MAX 17
+#define MAX 33
 using namespace std;
 
 
-int dp[MAX][MAX];
+long long dp[MAX][MAX][3];
 int house[MAX][MAX];
 int N;
-int answer = 0;
-int dr[3] = { 0, 1, 1 };
-int dc[3] = { 1, 0, 1 };
 
-bool chk(int r, int c)
+enum class Dir {
+	Horizontal,
+	Vertical,
+	Diagonal
+};
+
+void solve()
 {
-	if (r > N || c > N || house[r][c] == 1) return false;
-	return true;
-}
-
-void dfs(int r, int c, int dir)
-{
-	if (r == N && c == N)
+	for (int r = 1; r <= N; r++)
 	{
-		answer++;
-		return;
-	}
-
-	for (int i = 0; i < 3; i++)
-	{
-		if ((dir == 0 && i == 1) || (dir == 1 && i == 0)) continue;
-
-		int nr = r + dr[i];
-		int nc = c + dc[i];
-		if (chk(nr, nc) == false) continue;
-		if (i == 2 && (house[r + 1][c] == 1 || house[r][c + 1] == 1)) continue;
-		dfs(nr, nc, i);
+		for (int c = 1; c <= N; c++)
+		{
+			// 가로
+			if (r <= N && c + 1 <= N && house[r][c + 1] == 0)
+			{
+				dp[r][c + 1][(int)Dir::Horizontal] += dp[r][c][(int)Dir::Horizontal];
+				dp[r][c + 1][(int)Dir::Horizontal] += dp[r][c][(int)Dir::Diagonal];
+			}
+			// 세로
+			if (r + 1 <= N && c <= N && house[r + 1][c] == 0)
+			{
+				dp[r + 1][c][(int)Dir::Vertical] += dp[r][c][(int)Dir::Vertical];
+				dp[r + 1][c][(int)Dir::Vertical] += dp[r][c][(int)Dir::Diagonal];
+			}
+			// 대각선
+			if (r + 1 <= N && c + 1 <= N && house[r + 1][c] == 0 && house[r][c + 1] == 0 && house[r + 1][c + 1] == 0)
+			{
+				dp[r + 1][c + 1][(int)Dir::Diagonal] += dp[r][c][(int)Dir::Horizontal];
+				dp[r + 1][c + 1][(int)Dir::Diagonal] += dp[r][c][(int)Dir::Vertical];
+				dp[r + 1][c + 1][(int)Dir::Diagonal] += dp[r][c][(int)Dir::Diagonal];
+			}
+		}
 	}
 }
 
@@ -45,6 +51,10 @@ int main()
 		for (int j = 1; j <= N; j++)
 			cin >> house[i][j];
 
-	dfs(1, 2, 0);
-	cout << answer;
+
+	dp[1][2][(int)Dir::Horizontal] = 1;
+	solve();
+	
+
+	cout << dp[N][N][0] + dp[N][N][1] + dp[N][N][2] << '\n';
 }
