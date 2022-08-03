@@ -59,19 +59,11 @@ int main()
 		}
 	}
 
+
+
 	for (int i = 1; i <= N; i++)
 	{
-		if(isVisited[i] == false)
-			dfs(i);
-	}
-	while (!s.empty())
-	{
-		v.push_back(s.top());
-		s.pop();
-	}
-	for (int current : v)
-	{
-		ans(current);
+		ans(i);
 	}
 
 	for (int i = 1; i <= N; i++)
