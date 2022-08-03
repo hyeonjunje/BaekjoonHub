@@ -1,29 +1,12 @@
 #include<iostream>
 #include<vector>
-#include<stack>
+
 #define MAX 501
 using namespace std;
 
 vector<int> graph[MAX];
 int Time[MAX];
 int dp[MAX];
-stack<int> s;
-bool isVisited[MAX];
-
-vector<int> v;
-
-void dfs(int current)
-{
-	isVisited[current] = true;
-	for (int next : graph[current])
-	{
-		if (isVisited[next] == false)
-		{
-			dfs(next);
-		}
-	}
-	s.push(current);
-}
 
 int ans(int current)
 {
@@ -59,15 +42,9 @@ int main()
 		}
 	}
 
-
-
 	for (int i = 1; i <= N; i++)
 	{
 		ans(i);
-	}
-
-	for (int i = 1; i <= N; i++)
-	{
 		cout << dp[i] << '\n';
 	}
 }
