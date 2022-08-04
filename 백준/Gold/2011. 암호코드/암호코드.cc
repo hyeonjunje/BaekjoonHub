@@ -54,8 +54,8 @@ int main()
 
 	dp[0] = 0;
 	dp[1] = 1;
-	
-	if(num[1] == 10)
+
+	if (num[1] == 10)
 		dp[2] = num[0] * 100 + num[1] <= 26 ? 2 : 1;
 	else
 		dp[2] = num[0] * 10 + num[1] <= 26 ? 2 : 1;
@@ -75,7 +75,7 @@ int main()
 		{
 			sumNum = num[i - 2] * 10 + num[i - 1];
 		}
-		
+
 
 		if (sumNum <= 26)
 		{
