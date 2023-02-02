@@ -3,12 +3,12 @@
 
 using namespace std;
 
-double GetDistance(double x1, double y1, double x2, double y2)
+double GetDistance(int x1, int y1, int x2, int y2)
 {
 	return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-bool CheckInCircle(double x1, double y1, double x2, double y2, double r)
+bool CheckInCircle(int x1, int y1, int x2, int y2, int r)
 {
 	return r > GetDistance(x1, y1, x2, y2);
 }
@@ -23,7 +23,7 @@ int main()
 
 	while (T-- != 0)
 	{
-		double x1, y1, x2, y2, cx, cy, r, n, result = 0;
+		int x1, y1, x2, y2, cx, cy, r, n, result = 0;
 		cin >> x1 >> y1 >> x2 >> y2;
 
 		cin >> n;
