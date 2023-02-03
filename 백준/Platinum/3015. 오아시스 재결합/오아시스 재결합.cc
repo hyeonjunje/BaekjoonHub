@@ -9,11 +9,11 @@ int main()
 {
 	ios::sync_with_stdio(false); cin.tie(NULL);
 
-	long long N, num;
+	int N, num;
 
 	cin >> N;
-	vector<long long> v;
-	stack<pair<long long, long long>> s;
+	vector<int> v;
+	stack<pair<int, int>> s;
 
 	for (int i = 0; i < N; i++)
 	{
@@ -25,7 +25,7 @@ int main()
 
 	for (int i = 0; i < N; i++)
 	{
-		long long sameCount = 1;
+		int sameCount = 1;
 		while (!s.empty() && s.top().first <= v[i])
 		{
 			if (s.top().first == v[i])
