@@ -3,26 +3,29 @@
 #include <iostream>
 #include <algorithm>
 #include <set>
+#include<cmath>
 
 using namespace std;
 
-int len = 10000000;
-bool primeNum[10000000];
-
-void era()
+bool isPrime(int number)
 {
-    for (int i = 2; i < len; i++)
-        primeNum[i] = true;
+    if (number == 1)
+        return false;
+    if (number == 2)
+        return true;
+    if (number % 2 == 0)
+        return false;
 
-    for (int i = 2; i < len; i++)
+    bool isPrime = true;
+    for (int i = 2; i <= sqrt(number); i++)
     {
-        if (!primeNum[i])
-            continue;
-
-        for (int j = 2 * i; j < len; j += i)
-            primeNum[j] = false;
+        if (number % i == 0)
+            return false;
     }
+
+    return isPrime;
 }
+
 set<int> subSet;
 
 bool check[10];
@@ -53,13 +56,10 @@ set<int> GetAllNumbers(string numbers)
     for (int i = 1; i <= numbers.length(); i++)
     {
         subSet.clear();
-        //fill_n(check, 10, false);
 
         Reqursive(numbers, i);
         for (auto iter = subSet.begin(); iter != subSet.end(); iter++)
-        {
             mainSet.insert(*iter);
-        }
     }
     return mainSet;
 }
@@ -67,17 +67,11 @@ set<int> GetAllNumbers(string numbers)
 int solution(string numbers) {
     int answer = 0;
 
-    era();
-
     set<int> s = GetAllNumbers(numbers);
 
     for (auto iter = s.begin(); iter != s.end(); iter++)
-    {
-        if (primeNum[*iter])
-        {
+        if (isPrime(*iter))
             answer++;
-        }
-    }
 
     return answer;
 }
