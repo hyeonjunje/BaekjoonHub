@@ -1,41 +1,27 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <math.h>
+#include <map>
 
 using namespace std;
 
-vector<string> dic;
-string alpha = "AEIOU";
-
-void dfs(string word = "")
-{
-    if (word.size() >= 5)
-        return;
-
-    for (int i = 0; i < alpha.size(); i++)
-    {
-        word += alpha[i];
-        dic.push_back(word);
-        dfs(word);
-
-        word = word.substr(0, word.size() - 1);
-    }
-}
 
 int solution(string word) {
     int answer = 0;
 
-    dfs();
+    vector<int> rule = { 0, 0, 0, 0, 1 };
 
-    for (int i = 0; i < dic.size(); i++)
+    string alpha = "AEIOU";
+    map<char, int> dict;
+    for (int i = 0; i < alpha.size(); i++)
+        dict[alpha[i]] = i;
+
+    for (int i = rule.size() - 2; i >= 0; i--)
+        rule[i] = 1 + rule[i + 1] * alpha.size();
+    
+    for (int i = 0; i < word.size(); i++)
     {
-        if (dic[i] == word)
-        {
-            answer = i + 1;
-            break;
-        }
+        answer += dict[word[i]] * rule[i] + 1;
     }
+
     return answer;
 }
