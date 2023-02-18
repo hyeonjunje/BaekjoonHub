@@ -3,8 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <set>
-#include<cmath>
-
+#include <cmath>
 using namespace std;
 
 bool isPrime(int number)
@@ -26,52 +25,32 @@ bool isPrime(int number)
     return isPrime;
 }
 
-set<int> subSet;
-
-bool check[10];
-
-void Reqursive(string numbers, int length, int currentIndex = -1, string currentNumber = "")
-{
-    if (currentNumber.size() == length)
-    {
-        subSet.insert(stoi(currentNumber));
-        return;
-    }
-
-    for (int i = 0; i < numbers.size(); i++)
-    {
-        if (check[i]) continue;
-
-        currentNumber += numbers[i];
-        check[i] = true;
-        Reqursive(numbers, length, i, currentNumber);
-        check[i] = false;
-        currentNumber = currentNumber.substr(0, currentNumber.size() - 1);
-    }
-}
-
-set<int> GetAllNumbers(string numbers)
-{
-    set<int> mainSet;
-    for (int i = 1; i <= numbers.length(); i++)
-    {
-        subSet.clear();
-
-        Reqursive(numbers, i);
-        for (auto iter = subSet.begin(); iter != subSet.end(); iter++)
-            mainSet.insert(*iter);
-    }
-    return mainSet;
-}
 
 int solution(string numbers) {
     int answer = 0;
 
-    set<int> s = GetAllNumbers(numbers);
+    vector<int> numbersVec;
+    for (char ch : numbers)
+        numbersVec.push_back(ch - '0');
+
+    sort(numbersVec.begin(), numbersVec.end());
+    
+    set<int> s;
+    do
+    {
+        string num = "";
+        for (int i = 0; i < numbersVec.size(); i++)
+        {
+            num += to_string(numbersVec[i]);
+            s.insert(stoi(num));
+        }
+    } while (next_permutation(numbersVec.begin(), numbersVec.end()));
 
     for (auto iter = s.begin(); iter != s.end(); iter++)
+    {
         if (isPrime(*iter))
             answer++;
+    }
 
     return answer;
 }
