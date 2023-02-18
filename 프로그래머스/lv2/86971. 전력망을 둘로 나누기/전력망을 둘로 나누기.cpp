@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool checked[101];
+vector<bool> checked;
 
 int nodeCount = 1;
 int dfs(vector<vector<int>> graph, int current)
@@ -38,16 +38,16 @@ int solution(int n, vector<vector<int>> wires) {
 
     for (int i = 0; i < wires.size(); i++)
     {
-        fill_n(checked, 101, false);
+        checked.assign(n + 1, false);
         nodeCount = 1;
         checked[wires[i][1]] = true;
         int firstCount = dfs(graph, wires[i][0]);
 
-        fill_n(checked, 101, false);
+        checked.assign(n + 1, false);
         nodeCount = 1;
         checked[wires[i][0]] = true;
         int secondCount = dfs(graph, wires[i][1]);
-        //cout << firstCount << ' ' << secondCount << endl;
+        cout << firstCount << ' ' << secondCount << endl;
         answer = min(answer, abs(firstCount - secondCount));
     }
 
