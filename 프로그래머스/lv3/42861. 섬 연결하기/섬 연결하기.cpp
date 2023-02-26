@@ -2,45 +2,59 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
-vector<int> parent;
+vector<pair<int, int>> graph[100];
+bool visited[100];
 
-bool comp(vector<int> a, vector<int> b)
-{
-    return a[2] < b[2];
-}
+struct cmp {
+    bool operator()(pair<int, int> a, pair<int, int> b)
+    {
+        return a.second > b.second;
+    }
+};
 
-int findParent(int idx)
-{
-    if (parent[idx] == idx)
-        return idx;
-
-    return parent[idx] = findParent(parent[idx]);
-}
 
 int solution(int n, vector<vector<int>> costs) 
 {
-    int ans = 0;
-
-    for (int i = 0; i < n; i++)
-        parent.push_back(i);
-
-    sort(costs.begin(), costs.end(), comp);
+    int answer = 0;
 
     for (int i = 0; i < costs.size(); i++)
     {
-        int start = findParent(costs[i][0]);
-        int end = findParent(costs[i][1]);
-        int cost = costs[i][2];
+        graph[costs[i][0]].push_back({ costs[i][1] , costs[i][2] });
+        graph[costs[i][1]].push_back({ costs[i][0] , costs[i][2] });
+    }
 
-        if (start != end)
+    priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+
+    for (int i = 0; i < graph[0].size(); i++)
+        pq.push(graph[0][i]);
+    visited[0] = true;
+    int cnt = 0;
+
+    while (cnt < n - 1)
+    {
+        pair<int, int> cur = pq.top();
+        pq.pop();
+
+        int node = cur.first;
+        int cost = cur.second;
+
+        if (visited[node]) continue;
+
+        answer += cost;
+        visited[node] = true;
+        cnt++;
+
+        for (int i = 0; i < graph[node].size(); i++)
         {
-            ans += cost;
-            parent[end] = start;
+            int next = graph[node][i].first;
+            if (!visited[next])
+                pq.push(graph[node][i]);
         }
     }
     
-    return ans;
+    return answer;
 }
