@@ -51,7 +51,6 @@ int solution(int m, int n, vector<vector<int>> puddles) {
             if (map[nextY][nextX] != 0)
             {
                 map[nextY][nextX] += map[yPos][xPos] % 1000000007;
-                map[nextY][nextX] %= 1000000007;
                 continue;
             }
             else
@@ -59,7 +58,6 @@ int solution(int m, int n, vector<vector<int>> puddles) {
 
             q.push({ nextX, nextY });
         }
-
     }
 
     return answer % 1000000007;
