@@ -30,7 +30,7 @@ int solution(int m, int n, vector<vector<int>> puddles) {
 
         if (xPos == m && yPos == n)
         {
-            answer = map[yPos][xPos];
+            answer = map[yPos][xPos] % 1000000007;
             break;
         }
 
@@ -47,18 +47,11 @@ int solution(int m, int n, vector<vector<int>> puddles) {
             if (map[nextY][nextX] == -1)
                 continue;
 
-            // 전에 갔던 곳이라면
-            if (map[nextY][nextX] != 0)
-            {
-                map[nextY][nextX] += map[yPos][xPos] % 1000000007;
-                continue;
-            }
-            else
-                map[nextY][nextX] = map[yPos][xPos] % 1000000007;
-
-            q.push({ nextX, nextY });
+            // 전에 갔던 곳이 아니라면 큐에 추가
+            if (map[nextY][nextX] == 0)
+                q.push({ nextX, nextY });
+            map[nextY][nextX] += map[yPos][xPos] % 1000000007;
         }
     }
-
-    return answer % 1000000007;
+    return answer;
 }
