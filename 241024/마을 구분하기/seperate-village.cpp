@@ -18,7 +18,7 @@ bool IsRange(int x, int y)
     return x >= 0 && y >= 0 && x < n && y < n;
 }
 
-void dfs(int x, int y, int count)
+void dfs(int x, int y)
 {
     for(int i = 0; i < 4; ++i)
     {
@@ -41,9 +41,9 @@ void dfs(int x, int y, int count)
         }
 
         visited[curY][curX] = true;
-        dfs(curX, curY, count + 1);
+        dfs(curX, curY);
+        maxValue++;
     }
-    maxValue = max(maxValue, count);
 }
 
 int main() {
@@ -63,9 +63,9 @@ int main() {
         {
             if(arr[i][j] == 1 && !visited[i][j])
             {
-                maxValue = 0;
+                maxValue = 1;
                 visited[i][j] = true;
-                dfs(j, i, 1);
+                dfs(j, i);
                 v.push_back(maxValue);
             }
         }
