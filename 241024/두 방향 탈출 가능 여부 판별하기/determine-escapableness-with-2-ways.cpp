@@ -12,7 +12,7 @@ int dy[2] = {1, 0};
 
 void dfs(int x, int y)
 {
-    if(x == m && y == n)
+    if(x == m - 1 && y == n - 1)
     {
         result = 1;
     }
@@ -32,9 +32,9 @@ void dfs(int x, int y)
             continue;
         }
 
-        if(!visited[y][x])
+        if(!visited[curY][curX])
         {
-            visited[y][x] = true;
+            visited[curY][curX] = true;
             dfs(curX, curY);
         }
     }
