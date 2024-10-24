@@ -68,6 +68,9 @@ int main() {
     for(int i = 0; i < k; ++i)
     {
         cin >> x >> y;
+        if(arr[y][x] == 1)
+            continue;
+
         q.push({x, y});
         visited[y][x] = true;
     }
