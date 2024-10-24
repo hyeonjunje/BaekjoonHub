@@ -67,7 +67,7 @@ int main() {
 
     for(int i = 0; i < k; ++i)
     {
-        cin >> x >> y;
+        cin >> y >> x;
         if(arr[y-1][x-1] == 1)
             continue;
 
