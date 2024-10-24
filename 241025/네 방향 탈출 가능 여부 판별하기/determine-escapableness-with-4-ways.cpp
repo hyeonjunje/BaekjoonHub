@@ -6,8 +6,8 @@ using namespace std;
 #define MAX 100
 
 int n, m;
-int arr[MAX][MAX];
-bool visited[MAX][MAX];
+int arr[MAX][MAX]={0};
+bool visited[MAX][MAX]={false};
 
 
 
