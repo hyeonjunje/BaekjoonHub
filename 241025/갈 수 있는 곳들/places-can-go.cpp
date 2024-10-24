@@ -73,7 +73,7 @@ int main() {
     {
         for(int j = 0; j < n; ++j)
         {
-            if(arr[i][j] == 0 && visited[i][j] == 0)
+            if(arr[i][j] == 0 && !visited[i][j])
             {
                 result += bfs(j, i);
             }
