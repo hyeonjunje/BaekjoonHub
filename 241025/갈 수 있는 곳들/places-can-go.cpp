@@ -27,12 +27,12 @@ int bfs(int x, int y)
     {
         pair<int, int> p = q.front();
         q.pop();
-        int x = p.first;
-        int y = p.second;
+        int xx = p.first;
+        int yy = p.second;
         for(int i = 0; i < 4; ++i)
         {
-            int nextX = x + dx[i];
-            int nextY = y + dy[i];
+            int nextX = xx + dx[i];
+            int nextY = yy + dy[i];
 
             if(!CanGo(nextX, nextY))
             {
@@ -69,16 +69,15 @@ int main() {
         }
     }
 
-    for(int i = 0; i < n; ++i)
+    for(int i = 0; i < k; ++i)
     {
-        for(int j = 0; j < n; ++j)
+        cin >> x >> y;
+        if(arr[y - 1][x - 1] == 0 && !visited[y - 1][x - 1])
         {
-            if(arr[i][j] == 0 && !visited[i][j])
-            {
-                result += bfs(j, i);
-            }
+            result += bfs(0, 0);
         }
     }
+
     cout << result;
 
     return 0;
