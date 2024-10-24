@@ -9,6 +9,10 @@ int n, m;
 int arr[MAX][MAX];
 bool visited[MAX][MAX];
 
+int dx[4] = {0, 0, -1, 1};
+    int dy[4] = {1, -1, 0, 0};
+    queue<pair<int, int>> q;
+
 bool CanGo(int x, int y)
 {
     return x >= 0 && x < m && y >= 0 && y < n;
@@ -16,9 +20,7 @@ bool CanGo(int x, int y)
 
 int bfs(pair<int, int> p)
 {
-    int dx[4] = {0, 0, -1, 1};
-    int dy[4] = {1, -1, 0, 0};
-    queue<pair<int, int>> q;
+
     q.push(p);
     visited[p.second][p.first] = true;
     while(!q.empty())
