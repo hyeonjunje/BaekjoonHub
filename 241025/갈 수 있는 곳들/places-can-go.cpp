@@ -1,28 +1,24 @@
 #include <iostream>
 #include<queue>
 #include<algorithm>
+#include<utility>
 using namespace std;
 #define MAX 100
 
 int n, k;
 int arr[MAX][MAX] = {0};
 bool visited[MAX][MAX] = {false};
-
+queue<pair<int, int>> q;
 bool CanGo(int x, int y)
 {
     return x >= 0 && x < n && y >= 0 && y < n;
 }
 
-int bfs(int x, int y)
+int bfs()
 {
-    queue<pair<int, int>> q;
-    q.push({x, y});
-
-    visited[y][x] = true;
-
     int dx[4] = {0, 0, -1, 1};
     int dy[4] = {1, -1, 0, 0};
-    int result = 1; 
+    int result = q.size(); 
     while(!q.empty())
     {
         pair<int, int> p = q.front();
@@ -72,13 +68,10 @@ int main() {
     for(int i = 0; i < k; ++i)
     {
         cin >> x >> y;
-        if(arr[y - 1][x - 1] == 0 && !visited[y - 1][x - 1])
-        {
-            result += bfs(0, 0);
-        }
+        q.push({x, y});
+        visited[y][x] = true;
     }
-
-    cout << result;
+    cout << bfs();
 
     return 0;
 }
