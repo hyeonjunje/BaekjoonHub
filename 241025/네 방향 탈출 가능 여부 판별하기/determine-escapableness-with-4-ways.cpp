@@ -53,7 +53,7 @@ int bfs(pair<int, int> p)
                 continue;
             }
 
-            visited[current.second][current.first] = true;
+            visited[nextY][nextX] = true;
             q.push({nextX, nextY});
         }
     }
