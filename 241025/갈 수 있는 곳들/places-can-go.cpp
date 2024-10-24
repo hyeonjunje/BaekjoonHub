@@ -68,11 +68,11 @@ int main() {
     for(int i = 0; i < k; ++i)
     {
         cin >> x >> y;
-        if(arr[y][x] == 1)
+        if(arr[y-1][x-1] == 1)
             continue;
 
-        q.push({x, y});
-        visited[y][x] = true;
+        q.push({x-1, y-1});
+        visited[y-1][x-1] = true;
     }
     cout << bfs();
 
