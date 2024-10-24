@@ -20,12 +20,11 @@ int bfs(pair<int, int> p)
     int dy[4] = {1, -1, 0, 0};
     queue<pair<int, int>> q;
     q.push(p);
-
+    visited[p.second][p.first] = true;
     while(!q.empty())
     {
         pair<int, int> current = q.front();
         q.pop();
-        visited[current.second][current.first] = true;
 
         if(current.first == m - 1 && current.second == n - 1)
         {
@@ -52,6 +51,7 @@ int bfs(pair<int, int> p)
                 continue;
             }
 
+            visited[current.second][current.first] = true;
             q.push(make_pair(nextX, nextY));
         }
     }
