@@ -3,7 +3,7 @@
 using namespace std;
 #define MAX 1001
 
-bool BinarySearch(const vector<int>& v, int target)
+int BinarySearch(const vector<int>& v, int target)
 {
     int left = 0;
     int right = v.size() - 1;
