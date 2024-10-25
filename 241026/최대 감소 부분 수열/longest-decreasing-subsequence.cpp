@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define MAX 1001
+#define MAX 1000
 
 int BinarySearch(const vector<int>& v, int target)
 {
@@ -30,15 +30,15 @@ int main() {
     int n;
     cin >> n;
     int arr[MAX] = {0};
-    for(int i = n; i >= 1; --i)
+    for(int i = n - 1; i >= 0; --i)
     {
         cin >> arr[i];
     }
     
     vector<int> v;
-    v.push_back(arr[1]);
+    v.push_back(arr[0]);
 
-    for(int i = 2; i <= n; ++i)
+    for(int i = 0; i < n; ++i)
     {
         if(v[v.size() - 1] < arr[i])
         {
@@ -50,10 +50,7 @@ int main() {
             v[index] = arr[i];
         }
     }
-    for(int vv : v)
-    {
-        //cout << vv << ' ';
-    }
+
     cout << v.size();
     return 0;
 }
