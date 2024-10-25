@@ -5,9 +5,9 @@ using namespace std;
 
 bool BinarySearch(const vector<int>& v, int target)
 {
-    int right = v.size() - 1;
     int left = 0;
-    while(left < right)
+    int right = v.size() - 1;
+    while(left <= right)
     {
         int mid = left + (right - left) / 2;
 
