@@ -13,15 +13,15 @@ bool BinarySearch(const vector<int>& v, int target)
 
         if(v[mid] > target)
         {
-            right = mid - 1;
+            left = mid + 1;
         }
         else
         {
-            left = mid;
+            right = mid;
         }
     }
 
-    return right;
+    return left;
 }
 
 int main() {
