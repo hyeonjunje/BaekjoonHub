@@ -54,6 +54,6 @@ int main() {
     {
         //cout << vv << ' ';
     }
-    //cout << v.size();
+    cout << v.size();
     return 0;
 }
