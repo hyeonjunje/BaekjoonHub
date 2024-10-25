@@ -2,11 +2,11 @@
 using namespace std;
 #define MAX 46
 
-int memo[MAX]={-1};
+int memo[MAX]={-1,};
 
 int fibo(int n)
 {
-    if(memo[n] != -1)
+    if(memo[n] != 0)
     {
         return memo[n];
     }
@@ -26,6 +26,7 @@ int main() {
     memo[0]=0;
     memo[1]=1;
     memo[2]=1;
+
     cout << fibo(n);
 
     return 0;
