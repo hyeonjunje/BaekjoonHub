@@ -7,11 +7,11 @@ bool BinarySearch(const vector<int>& v, int target)
 {
     int left = 0;
     int right = v.size() - 1;
-    while(left <= right)
+    while(left < right)
     {
         int mid = left + (right - left) / 2;
 
-        if(v[mid] > target)
+        if(v[mid] < target)
         {
             left = mid + 1;
         }
@@ -30,7 +30,7 @@ int main() {
     int n;
     cin >> n;
     int arr[MAX] = {0};
-    for(int i = 0; i < n; ++i)
+    for(int i = n - 1; i >= 0; --i)
     {
         cin >> arr[i];
     }
@@ -40,7 +40,7 @@ int main() {
 
     for(int i = 0; i < n; ++i)
     {
-        if(v[v.size() - 1] > arr[i])
+        if(v[v.size() - 1] < arr[i])
         {
             v.push_back(arr[i]);
         }
