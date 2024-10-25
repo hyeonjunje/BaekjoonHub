@@ -11,7 +11,7 @@ int binarySearch(int target)
     int left = 0;
     int right = dp.size() - 1;
 
-    while(left <= right)
+    while(left < right)
     {
         int mid = (left + right) / 2;
 
@@ -19,17 +19,12 @@ int binarySearch(int target)
         {
             left = mid + 1;
         }
-        else if(dp[mid] == target)
+        else
         {
-            return mid;
-        }
-        else if(dp[mid] > target)
-        {
-            right = mid - 1;
+            right = mid;
         }
     }
     return left;
-
 }
 
 void print()
