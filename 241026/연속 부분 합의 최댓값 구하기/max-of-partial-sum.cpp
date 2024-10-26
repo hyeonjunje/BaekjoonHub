@@ -13,6 +13,12 @@ int main() {
     {
         cin >> arr[i];
     }
+
+    for(int i = 0; i < n; ++i)
+    {
+        dp[i] = -1001;
+    }
+
     dp[0] = arr[0];
     for(int i = 1; i < n; ++i)
     {
