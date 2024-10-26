@@ -25,10 +25,10 @@ int main() {
         dp[i] = max(dp[i - 1] + arr[i], arr[i]);
     }
 
-    int result = 0;
-    for(int vv : dp)
+    int result = -1001;
+    for(int i = 0; i < n; ++i)
     {
-        result = max(result, vv);
+        result = max(result, dp[i]);
     }
     cout << result;
 
